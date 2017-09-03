@@ -8,7 +8,7 @@ pipeline {
             echo 'Starting Build'
             
           },
-          "": {
+          "Parallel Start": {
             echo 'Paralleling man ohhh'
             
           }
@@ -17,12 +17,30 @@ pipeline {
     }
     stage('Build') {
       steps {
-        echo 'Hello from build'
+        parallel(
+          "Build": {
+            echo 'Hello from build'
+            
+          },
+          "parallel Build": {
+            echo 'Parallel build ...'
+            
+          }
+        )
       }
     }
     stage('Test') {
       steps {
-        echo 'Testing Testing 123'
+        parallel(
+          "Test": {
+            echo 'Testing Testing 123'
+            
+          },
+          "Parallel Test ...": {
+            echo 'parallel test'
+            
+          }
+        )
       }
     }
     stage('Deploy') {
