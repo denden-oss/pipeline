@@ -2,45 +2,45 @@ pipeline {
   agent any
   stages {
     stage('Starting') {
-      steps {
-        parallel(
-          "Starting": {
+      parallel {
+        stage('Starting') {
+          steps {
             echo 'Starting Build'
-            
-          },
-          "Parallel Start": {
-            echo 'Paralleling man ohhh'
-            
           }
-        )
+        }
+        stage('Parallel Start') {
+          steps {
+            echo 'Paralleling man ohhh'
+          }
+        }
       }
     }
     stage('Build') {
-      steps {
-        parallel(
-          "Build": {
+      parallel {
+        stage('Build') {
+          steps {
             echo 'Hello from build'
-            
-          },
-          "parallel Build": {
-            echo 'Parallel build ...'
-            
           }
-        )
+        }
+        stage('parallel Build') {
+          steps {
+            echo 'Parallel build ...'
+          }
+        }
       }
     }
     stage('Test') {
-      steps {
-        parallel(
-          "Test": {
+      parallel {
+        stage('Test') {
+          steps {
             echo 'Testing Testing 123'
-            
-          },
-          "Parallel Test ...": {
-            echo 'parallel test'
-            
           }
-        )
+        }
+        stage('Parallel Test ...') {
+          steps {
+            echo 'parallel test'
+          }
+        }
       }
     }
     stage('Deploy') {
@@ -48,5 +48,8 @@ pipeline {
         echo 'Deploy something'
       }
     }
+  }
+  environment {
+    aa = 'aa'
   }
 }
